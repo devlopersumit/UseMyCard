@@ -11,7 +11,7 @@
     margin-top: 40px;
 }
 .usemycard-section .text-content h2 {
-    font-size: 40px;
+    font-size: 2.5rem;
     line-height: 40px;
     font-weight: 700;
     letter-spacing: -0.9px;
@@ -22,7 +22,7 @@
     color: #907ce2;
 }
 .usemycard-section .text-content p {
-    font-size: 20px;
+    font-size: 1.25rem;
     line-height: 25px;
     font-weight:400;
     letter-spacing: normal;
@@ -136,7 +136,66 @@
 }
 /* Mobile phones */
 @media (max-width: 480px) {
-    .left-section-cards{
-        width: 100%;
+    .usemycard-section {
+        padding: 30px 15px;
+    }
+
+    .usemycard-section .text-content {
+        margin-top: 20px;
+    }
+
+    .usemycard-section .text-content h2 {
+        font-size: 24px;
+        line-height: 32px;
+        letter-spacing: -0.5px;
+        margin-bottom: 10px;
+    }
+
+    .usemycard-section .text-content p {
+        font-size: 16px;
+        line-height: 22px;
+    }
+
+    .usemycard-content-section {
+        padding: 10px;
+        gap: 15px;
+        margin-top: 25px;
+    }
+
+    .left-section {
+        padding: 5px;
+        gap: 15px;
+    }
+
+    .right-section {
+        padding: 5px;
+    }
+
+    .left-section-cards {
+        height: auto;
+        min-height: 100px;
+        padding: 15px;
+        gap: 12px;
+    }
+
+    .numbering {
+        width: 28px;
+        height: 28px;
+        font-size: 14px;
+        padding: 6px;
+    }
+
+    .texts h3 {
+        font-size: 16px;
+        margin-bottom: 4px;
+    }
+
+    .texts p {
+        font-size: 14px;
+        line-height: 20px;
+    }
+
+    .first-card {
+        box-shadow: -3px 0px 0px #907ce2, 0px 1px 0px #DFDFE1;
     }
 }

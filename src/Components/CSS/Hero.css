@@ -12,6 +12,7 @@
     display: flex;
     flex-direction: column;
     gap: 15px;
+    margin-top: 100px;
 }
 .upper-left h1{
   font-size: 60px;
@@ -74,6 +75,7 @@
     padding: 32px;
     color: white;
     font-family: "Inter", sans-serif;
+    margin-top: 100px;
 }
 .right .right-inner-section h3 {
     font-size: 30px;
