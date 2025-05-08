@@ -1,0 +1,368 @@
+.outer-container {
+    max-width: 100%;
+    padding: 96px;
+    background-color: #F8F8F6;
+    font-family: "Inter", sans-serif;
+}
+
+.inner-container {
+    width: 1216px;
+    height: 100%;
+    margin: 0 auto;
+    background-color: #D8D4F9;
+    border-radius: 16px;
+}
+
+.card-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.left-side {
+    flex-basis: 48.5%;
+    margin: 114px 48px;
+}
+
+.left-side h2 {
+    font-size: 36px;
+    line-height: 40px;
+    font-weight: 700;
+    letter-spacing: -0.9px;
+    color: #373743;
+    margin-bottom: 10px;
+}
+
+.left-side h2 span {
+    color: #907CE2;
+}
+
+.left-side p {
+    font-size: 18px;
+    line-height: 28px;
+    font-weight: 400;
+    letter-spacing: normal;
+    color: #808089;
+    margin-bottom: 32px;
+}
+
+.left-side button {
+    width: 200px;
+    height: 48px;
+    border-radius: 30px;
+    background-color: #907CE2;
+    border: none;
+    color: white;
+    box-shadow: 0 4px 12px rgba(0, 123, 255, 0.2);
+    position: relative;
+    left: 90px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.left-side button:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(0, 123, 255, 0.4);
+}
+
+.right-side {
+    flex-basis: 48.5%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    margin: 48px;
+    gap: 24px;
+}
+
+.right-side .cards {
+    width: 536px;
+    height: 132px;
+    border-radius: 8px;
+    padding: 24px;
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    background-color: #FFFFFF;
+    border: 1px solid #DFDFE1;
+    transition: all 0.3s ease;
+}
+
+.cards:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(144, 124, 226, 0.1);
+}
+
+.cards-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background-color: #F8F8F6;
+    color: #907CE2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    padding-top: 60px;
+    flex-shrink: 0;
+}
+
+.cards-text {
+    flex: 1;
+    text-align: left;
+}
+
+.cards-text h3 {
+    font-size: 20px;
+    font-weight: 600;
+    color: #373743;
+    margin-bottom: 0;
+}
+
+.cards-text p {
+    font-size: 16px;
+    line-height: 24px;
+    color: #808089;
+    margin-bottom: 40px;
+}
+
+/* Mobile phones */
+@media (max-width: 480px) {
+    .outer-container {
+        padding: 20px;
+    }
+
+    .inner-container {
+        width: 100%;
+        border-radius: 12px;
+    }
+
+    .card-container {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .left-side {
+        margin: 20px;
+        text-align: left;
+    }
+
+    .left-side h2 {
+        font-size: 24px;
+        line-height: 28px;
+    }
+
+    .left-side p {
+        font-size: 14px;
+        line-height: 20px;
+        margin-bottom: 20px;
+    }
+
+    .left-side button {
+        width: 100%;
+        max-width: 200px;
+        left: 0;
+        margin: 0;
+    }
+
+    .right-side {
+        margin: 0 20px 20px;
+        width: calc(100% - 40px);
+        gap: 16px;
+    }
+
+    .right-side .cards {
+        width: 100%;
+        max-height: 100px;
+        padding: 16px;
+        gap: 12px;
+    }
+
+    .cards-icon {
+        width: 40px;
+        height: 40px;
+        font-size: 20px;
+        padding-top: 30px;
+    }
+
+    .cards-text h3 {
+        font-size: 16px;
+    }
+
+    .cards-text p {
+        font-size: 14px;
+        line-height: 20px;
+        padding: 30px 10px;
+    }
+}
+
+/* Tablets (portrait) */
+@media (min-width: 481px) and (max-width: 768px) {
+    .outer-container {
+        padding: 30px;
+    }
+
+    .inner-container {
+        width: 100%;
+        border-radius: 14px;
+    }
+
+    .card-container {
+        flex-direction: column;
+        gap: 30px;
+    }
+
+    .left-side {
+        margin: 30px;
+        text-align: left;
+    }
+
+    .left-side h2 {
+        font-size: 28px;
+        line-height: 32px;
+    }
+
+    .left-side p {
+        font-size: 16px;
+        line-height: 24px;
+    }
+
+    .left-side button {
+        left: 0;
+        margin: 0;
+    }
+
+    .right-side {
+        margin: 0 30px 30px;
+        width: calc(100% - 60px);
+        gap: 20px;
+    }
+
+    .right-side .cards {
+        width: 100%;
+        padding: 20px;
+        gap: 16px;
+    }
+
+    .cards-icon {
+        width: 44px;
+        height: 44px;
+        font-size: 22px;
+        padding-top: 40px;
+        background-color: transparent;
+    }
+
+    .cards-text h3 {
+        font-size: 18px;
+    }
+
+    .cards-text p {
+        font-size: 15px;
+        line-height: 22px;
+    }
+}
+
+/* Tablets (landscape) and small laptops */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .outer-container {
+        padding: 40px;
+    }
+
+    .inner-container {
+        width: 100%;
+        max-width: 900px;
+    }
+
+    .card-container {
+        flex-direction: row;
+        gap: 30px;
+    }
+
+    .left-side {
+        margin: 40px 30px;
+    }
+
+    .left-side h2 {
+        font-size: 32px;
+        line-height: 36px;
+    }
+
+    .right-side {
+        margin: 40px 30px;
+        gap: 20px;
+    }
+
+    .right-side .cards {
+        width: 100%;
+        max-width: 380px;
+        padding: 22px;
+        gap: 18px;
+    }
+
+    .cards-icon {
+        width: 46px;
+        height: 46px;
+        font-size: 24px;
+        padding-top: 50px;
+    }
+
+    .cards-text h3 {
+        font-size: 19px;
+    }
+
+    .cards-text p {
+        font-size: 15px;
+        line-height: 23px;
+    }
+}
+
+/* Laptops and desktops */
+@media (min-width: 1025px) {
+    .outer-container {
+        padding: 96px;
+    }
+
+    .inner-container {
+        width: 1216px;
+    }
+
+    .card-container {
+        gap: 60px;
+    }
+
+    .left-side {
+        margin: 114px 48px;
+    }
+
+    .right-side {
+        margin: 48px;
+        gap: 24px;
+    }
+
+    .right-side .cards {
+        width: 536px;
+        height: 132px;
+        padding: 24px;
+        gap: 20px;
+    }
+
+    .cards-icon {
+        width: 48px;
+        height: 48px;
+        font-size: 20px;
+        padding-top: 60px;
+    }
+
+    .cards-text h3 {
+        font-size: 20px;
+    }
+
+    .cards-text p {
+        font-size: 16px;
+        line-height: 24px;
+    }
+} 

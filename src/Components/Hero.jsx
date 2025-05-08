@@ -11,7 +11,9 @@ function Hero() {
 
          <p>UseMyCard helps you create trusted circles to share card benefits <br /> with friends and family without compromising security. Track usage,<br /> manage offers, and save more together.</p>
 
+            <div className="hero-btn">
          <button>Get Started</button>
+         </div>
          </div>
 
           <div className="lower-left">
