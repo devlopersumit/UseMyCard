@@ -2,9 +2,11 @@ import { Fragment, useState } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import { XMarkIcon } from '@heroicons/react/24/outline'
 import { FaGoogle } from 'react-icons/fa'
+import { useAuth } from '../context/AuthContext'
 import './CSS/LoginModal.css'
 
 export default function SignUpModal({ isOpen, onClose }) {
+  const { signUp, signInWithGoogle } = useAuth()
   const [formData, setFormData] = useState({
     fullName: '',
     email: '',
@@ -20,7 +22,6 @@ export default function SignUpModal({ isOpen, onClose }) {
       ...prev,
       [name]: value
     }));
-    // Clear error when user starts typing
     if (errors[name]) {
       setErrors(prev => ({
         ...prev,
@@ -59,16 +60,22 @@ export default function SignUpModal({ isOpen, onClose }) {
 
     setIsLoading(true);
     try {
-      // TODO: Implement your signup logic here
-      console.log('Signup attempt with:', formData);
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      const { error } = await signUp({
+        email: formData.email,
+        password: formData.password,
+        options: {
+          data: {
+            full_name: formData.fullName
+          }
+        }
+      });
+      if (error) throw error;
       onClose();
     } catch (error) {
       console.error('Signup failed:', error);
       setErrors(prev => ({
         ...prev,
-        submit: 'Signup failed. Please try again.'
+        submit: error.message || 'Signup failed. Please try again.'
       }));
     } finally {
       setIsLoading(false);
@@ -78,16 +85,14 @@ export default function SignUpModal({ isOpen, onClose }) {
   const handleGoogleSignup = async () => {
     setIsLoading(true);
     try {
-      // TODO: Implement Google signup logic here
-      console.log('Google signup attempt');
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      const { error } = await signInWithGoogle();
+      if (error) throw error;
       onClose();
     } catch (error) {
       console.error('Google signup failed:', error);
       setErrors(prev => ({
         ...prev,
-        submit: 'Google signup failed. Please try again.'
+        submit: error.message || 'Google signup failed. Please try again.'
       }));
     } finally {
       setIsLoading(false);
@@ -189,7 +194,7 @@ export default function SignUpModal({ isOpen, onClose }) {
                     value={formData.password}
                     onChange={handleChange}
                     className={`form-input ${errors.password ? 'error' : ''}`}
-                    placeholder="Create a password"
+                    placeholder="Enter your password"
                     disabled={isLoading}
                   />
                   {errors.password && (
@@ -221,7 +226,7 @@ export default function SignUpModal({ isOpen, onClose }) {
                   className="primary-button"
                   disabled={isLoading}
                 >
-                  {isLoading ? 'Creating Account...' : 'Create Account'}
+                  {isLoading ? 'Signing up...' : 'Sign up'}
                 </button>
 
                 <div className="divider">
@@ -236,7 +241,7 @@ export default function SignUpModal({ isOpen, onClose }) {
                   disabled={isLoading}
                 >
                   <FaGoogle className="h-5 w-5" />
-                  {isLoading ? 'Creating Account...' : 'Sign up with Google'}
+                  {isLoading ? 'Signing up...' : 'Sign up with Google'}
                 </button>
               </form>
             </Dialog.Panel>

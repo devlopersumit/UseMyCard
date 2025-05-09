@@ -1,46 +1,71 @@
-import { useState } from "react";
-import "./CSS/Navbar.css"
-import LoginModal from "./LoginModal";
-import SignUpModal from "./SignUpModal";
+import { useState } from 'react'
+import { Link, useLocation } from 'react-router-dom'
+import { useAuth } from '../context/AuthContext'
+import { FaBars, FaTimes } from 'react-icons/fa'
+import './CSS/Navbar.css'
 import logo from "../assets/Updated-UseMyCard.png";
 
-function Navbar() {
-  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
-  const [isSignUpModalOpen, setIsSignUpModalOpen] = useState(false);
+export default function Navbar({ onLoginClick, onSignupClick }) {
+  const { user, signOut } = useAuth()
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const location = useLocation()
+
+  const navLinks = [
+    { path: '/dashboard', label: 'Dashboard' },
+    { path: '/cards', label: 'My Cards' },
+    { path: '/logs', label: 'Usage Logs' },
+    { path: '/add-card', label: 'Add Card' },
+  ]
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen)
+  }
+
+  const handleLogout = async () => {
+    await signOut()
+  }
 
   return (
-    <div className="navbar">
-      <div className="logo">
-        <img src={logo} alt="UseMyCard" />
-        <h1>UseMy<span>Card</span></h1>
-      </div>
-      
-      <div className="btns">
-        <button 
-          className="login-btn"
-          onClick={() => setIsLoginModalOpen(true)}
-        >
-          Login
-        </button>
-        <button 
-          className="signup-btn"
-          onClick={() => setIsSignUpModalOpen(true)}
-        >
-          Signup
-        </button>
-      </div>
+    <nav className="navbar">
+      <div className="navbar-container">
+        <Link to="/" className="logo">
+          <img src={logo} alt="UseMyCard" />
+          <h1>UseMy<span>Card</span></h1>
+        </Link>
 
-      <LoginModal 
-        isOpen={isLoginModalOpen} 
-        onClose={() => setIsLoginModalOpen(false)} 
-      />
+        <button className="menu-button" onClick={toggleMenu}>
+          {isMenuOpen ? <FaTimes /> : <FaBars />}
+        </button>
 
-      <SignUpModal
-        isOpen={isSignUpModalOpen}
-        onClose={() => setIsSignUpModalOpen(false)}
-      />
-    </div>
-  );
+        <div className={`nav-links ${isMenuOpen ? 'active' : ''}`}>
+          {user ? (
+            <>
+              {navLinks.map((link) => (
+                <Link
+                  key={link.path}
+                  to={link.path}
+                  className={`nav-link ${location.pathname === link.path ? 'active' : ''}`}
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  {link.label}
+                </Link>
+              ))}
+              <button className="logout-button" onClick={handleLogout}>
+                Logout
+              </button>
+            </>
+          ) : (
+            <>
+              <button className="login-btn" onClick={onLoginClick}>
+                Login
+              </button>
+              <button className="signup-btn" onClick={onSignupClick}>
+                Sign Up
+              </button>
+            </>
+          )}
+        </div>
+      </div>
+    </nav>
+  )
 }
-
-export default Navbar;

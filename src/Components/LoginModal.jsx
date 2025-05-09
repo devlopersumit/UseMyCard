@@ -2,9 +2,11 @@ import { Fragment, useState } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import { XMarkIcon } from '@heroicons/react/24/outline'
 import { FaGoogle } from 'react-icons/fa'
+import { useAuth } from '../context/AuthContext'
 import './CSS/LoginModal.css'
 
 export default function LoginModal({ isOpen, onClose }) {
+  const { signIn, signInWithGoogle } = useAuth()
   const [formData, setFormData] = useState({
     email: '',
     password: ''
@@ -49,16 +51,14 @@ export default function LoginModal({ isOpen, onClose }) {
 
     setIsLoading(true);
     try {
-      // TODO: Implement your login logic here
-      console.log('Login attempt with:', formData);
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      const { error } = await signIn(formData);
+      if (error) throw error;
       onClose();
     } catch (error) {
       console.error('Login failed:', error);
       setErrors(prev => ({
         ...prev,
-        submit: 'Login failed. Please try again.'
+        submit: error.message || 'Login failed. Please try again.'
       }));
     } finally {
       setIsLoading(false);
@@ -68,16 +68,14 @@ export default function LoginModal({ isOpen, onClose }) {
   const handleGoogleLogin = async () => {
     setIsLoading(true);
     try {
-      // TODO: Implement Google login logic here
-      console.log('Google login attempt');
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      const { error } = await signInWithGoogle();
+      if (error) throw error;
       onClose();
     } catch (error) {
       console.error('Google login failed:', error);
       setErrors(prev => ({
         ...prev,
-        submit: 'Google login failed. Please try again.'
+        submit: error.message || 'Google login failed. Please try again.'
       }));
     } finally {
       setIsLoading(false);
