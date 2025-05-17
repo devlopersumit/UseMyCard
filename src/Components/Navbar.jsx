@@ -2,7 +2,7 @@ import logo from "../assets/Updated-UseMyCard.png";
 
 function Navbar() {
     return (
-        <nav className="bg-white shadow fixed top-0 left-0 right-0 z-[1000] font-['Poppins',sans-serif] text-[#373743] w-full">
+        <nav className="bg-white shadow fixed top-0 left-0 right-0 z-[1000] font-['Poppins',sans-serif] text-[#373743] w-full flex-wrap">
             <div className="max-w-[1200px] mx-auto px-4 py-4 flex justify-between items-center">
                 <div className="flex items-center no-underline text-[#2563eb] text-2xl md:text-3xl font-bold">
                     <img src={logo} alt="UseMyCard" className="h-[40px] w-auto mr-2 transition-transform duration-300 ease-in-out hover:scale-105 md:h-[45px]" />

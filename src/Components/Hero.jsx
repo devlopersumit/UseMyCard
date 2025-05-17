@@ -1,22 +1,22 @@
 import React from "react";
 
 const Hero = () => (
-  <section className="flex flex-col md:flex-row items-center justify-between px-8 py-16 bg-gray-100 min-h-[80vh]">
+  <section className="w-full p-[80px] flex justify-around bg-[#F8F8FC] text-[#373743] flex-wrap font-[display flex flex-row">
     {/* Left Side */}
-    <div className="flex-1">
-      <h1 className="text-5xl font-bold text-gray-900 mb-2">
+    <div className="basis-[45%] flex flex-col gap-[15px] mt-[100px] ml-[70pxpx]">
+      <h1 className="text-[60px] leading-[60px] tracking-normal font-bold text-[#1F2937]">
         Share Card Benefits
       </h1>
-      <h2 className="text-5xl font-bold" style={{ color: '#907CE2' }}>
+      <h2 className="text-[60px] leading-[60px] tracking-normal font-bold" style={{ color: '#907CE2' }}>
         Without Sharing <br /> Card Numbers
       </h2>
-      <p className="text-lg text-gray-600 mb-6 max-w-xl">
+      <p className="text-[20px] leading-[30px] font-[400] tracking-normal text-[#808089] mb-[20px]">
         UseMyCard helps you create trusted circles to share card benefits with friends and family without compromising security. Track usage, manage offers, and save more together.
       </p>
-      <button className="px-8 py-3 rounded-full font-semibold shadow transition mb-8 text-white" style={{ backgroundColor: '#907CE2' }}>
+      <button className="py-[0.6rem] px-[2rem] rounded-[30px] font-semibold cursor-pointer bg-[#907CE2] transition-all duration-[0.3s] ease-linear text-[0.95rem] tracking-[0.5px] bg-[#907CE2]  border-none text-white shadow-[0 4px 12px rgba(0,123,255,0.2)] my-0 mx-auto hover:bg-[#0056b3] translate-[-2px] shadow-[0 6px 15px rgba(0,123,255,0.4)]">
         Get Started
       </button>
-      <div className="flex space-x-16 mt-4">
+      <div className="flex justify-evenly">
         <div>
           <div className="text-3xl font-bold">100%</div>
           <div className="text-gray-600">Private & Secure</div>
@@ -29,27 +29,27 @@ const Hero = () => (
     </div>
     {/* Right Side */}
     <div className="flex-1 mt-12 md:mt-0 md:ml-12">
-      <div className="rounded-2xl p-10 text-white shadow-lg" style={{ backgroundColor: '#907CE2' }}>
-        <h3 className="text-3xl font-bold mb-6">Secure Card Sharing Made Simple</h3>
-        <ul className="space-y-6">
-          <li className="flex items-start">
-            <span className="mr-4 text-3xl">🛡️</span>
+      <div className="basis-[55%] w-[612px] h-[432px] border-none rounded-2xl bg-[#907CE2] p-[32px] text-white mt-[100px] ml-[80px]" style={{ backgroundColor: '#907CE2' }}>
+        <h3 className="text-[30px] leading-[32px] font-bold tracking-normal p-[20px] my-3">Secure Card Sharing Made Simple</h3>
+        <ul className="space-y-6 flex flex-col gap-4">
+          <li className="flex items-start ">
+            <span className="mr-4 text-3xl text-white">🛡️</span>
             <div>
-              <div className="font-bold text-lg">Maximum Security</div>
+              <div className="font-bold text-xl">Maximum Security</div>
               <div>Share benefits without exposing sensitive card information</div>
             </div>
           </li>
           <li className="flex items-start">
             <span className="mr-4 text-3xl">👥</span>
             <div>
-              <div className="font-bold text-lg">Trusted Circles</div>
+              <div className="font-bold text-xl">Trusted Circles</div>
               <div>Create groups with family and friends to share benefits</div>
             </div>
           </li>
           <li className="flex items-start">
             <span className="mr-4 text-3xl">🎁</span>
             <div>
-              <div className="font-bold text-lg">Maximize Benefits</div>
+              <div className="font-bold text-xl">Maximize Benefits</div>
               <div>Get the most from your premium cards by sharing perks</div>
             </div>
           </li>
