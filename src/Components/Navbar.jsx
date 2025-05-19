@@ -44,7 +44,7 @@ function Navbar() {
                     <div className="flex flex-col p-4 space-y-4">
                         <a href="#features" className="text-gray-600 hover:text-[#907CE2] transition-colors py-2">Features</a>
                         <a href="#how-it-works" className="text-gray-600 hover:text-[#907CE2] transition-colors py-2">How it Works</a>
-                        <a href="#pricing" className="text-gray-600 hover:text-[#907CE2] transition-colors py-2">Pricing</a>
+                        <a href="#faq" className="text-gray-600 hover:text-[#907CE2] transition-colors py-2">FAQ</a>
                         <div className="flex flex-col gap-3 pt-2">
                             <button className="w-full py-2 rounded-full font-semibold text-[#907CE2] bg-transparent border-2 border-[#907CE2] hover:bg-[#907CE2] hover:text-white transition-all duration-300">Login</button>
                             <button className="w-full py-2 rounded-full font-semibold text-white bg-[#907CE2] hover:bg-[#7B68EE] transition-all duration-300 shadow-lg">Sign Up</button>
