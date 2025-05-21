@@ -112,7 +112,7 @@ function UseMyCardWorking() {
 
           {/* Right Section - Logo */}
           <div className="relative">
-            <div className="relative z-10 transform transition-all duration-500 hover:scale-105">
+            <div className="relative z-10 transform transition-all duration-500">
               <div className="w-full h-[600px]  rounded-2xl flex items-center justify-center bg-gradient-to-br from-[#7B68EE]/20 to-[#9370DB]/20">
                 <div className="text-center">
                   <img 

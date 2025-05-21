@@ -3,6 +3,7 @@ import Hero from "./Components/Hero";
 import FeaturesCard from "./Components/FeaturesCard";
 import UseMyCardWorking from "./Components/UseMyCardWorking";
 import CardBenefit from "./Components/CardBenefit";
+import FAQ from "./Components/FAQ"
 function App() {
 
 
@@ -13,6 +14,8 @@ function App() {
     <FeaturesCard />
     <UseMyCardWorking />
     <CardBenefit />
+    <FAQ />
+
     
     </>
   )

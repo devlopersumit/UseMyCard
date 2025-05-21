@@ -1,0 +1,61 @@
+import { useState } from "react";
+
+function FAQ() {
+
+   const faqs = [
+        {
+            question: "What is UseMyCard?",
+            answer: "UseMyCard is a platform that helps you manage and optimize your credit card usage, track rewards, and make informed financial decisions."
+        },
+        {
+            question: "How does UseMyCard work?",
+            answer: "UseMyCard provides tools to track your credit card spending, analyze rewards, and suggest the best cards for different types of purchases."
+        },
+        {
+            question: "Is my financial data secure?",
+            answer: "Yes, we take security seriously. All your data is encrypted and we never store your actual credit card numbers."
+        },
+        {
+            question: "What features are included?",
+            answer: "Our platform includes expense tracking, reward optimization, spending analytics, and personalized card recommendations."
+        },
+        {
+            question: "Is there a mobile app available?",
+            answer: "No, UseMyCard is currently not available on playstore or appstore, but will launch soon."
+        }
+    ];
+
+  const [openIndex, setOpenIndex] = useState(null);
+
+  const toggle = (index) => {
+    setOpenIndex(openIndex === index ? null : index);
+  };
+    return(
+        <div className="w-full h-screen bg-[#F0F0FF] py-28">
+         <div className="max-w-[800px] max-h-[700px] rounded-lg  mx-auto">
+            <h1 className="text-[36px] leading-[40px] font-bold tracking-normal mb-[50px] text-center">Frequently Asked <span className="text-[#907CE2]">Questions</span></h1>
+      {faqs.map((faq, index) => (
+        <div 
+        key={index} 
+        className="mb-4 border rounded shadow-sm text-[16px] leading-6 tracking-normal font-[400] bg-white text-[#1f2937] py-3 hover:scale-[1.001] hover:shadow-xl transition-all duration-400">
+          <div
+            className="cursor-pointer p-4 bg-transparent flex justify-between"
+            onClick={() => toggle(index)}
+          >
+            <h3 className="font-medium text-[20px]">{faq.question}</h3>
+            <i class="fa-solid fa-arrow-down text-[#907ce2]"></i>
+          </div>
+
+          {openIndex === index && (
+            <div className="p-4 bg-white border-t">
+              <p className="text-gray-700">{faq.answer}</p>
+            </div>
+          )}
+        </div>
+      ))}
+    </div>
+    </div>
+    );
+}
+
+export default FAQ
