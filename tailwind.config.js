@@ -1,11 +1,19 @@
-/** @type {import('tailwindcss').Config} */
 export default {
-   content: [
+  content: [
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
     extend: {
+      screens: {
+        'xs': '320px',
+        'sm': '640px',
+        'md': '768px',
+        'lg': '1024px',
+        'xl': '1280px',
+        '2xl': '1536px',
+      },
+
       keyframes: {
         'gradient-x': {
           '0%, 100%': {
@@ -22,15 +30,16 @@ export default {
           '50%': { transform: 'translateY(-20px)' }
         }
       },
+
       animation: {
         'gradient-x': 'gradient-x 15s ease infinite',
         'float': 'float 6s ease-in-out infinite'
-      }
+      },
     },
+    
     fontFamily: {
-      display: ['Poppins',],
+      display: ['Poppins', 'sans-serif'],
     },
   },
   plugins: [],
 }
-

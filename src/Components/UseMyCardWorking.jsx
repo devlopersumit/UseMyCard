@@ -3,7 +3,7 @@ import logo from "../assets/Updated-UseMyCard.png";
 
 function UseMyCardWorking() {
   return (
-    <section className="w-full min-h-screen pt-2 pb-12 px-4 md:px-8 py-14 lg:px-16 flex flex-col justify-center items-center text-[#373743] relative overflow-hidden " id="how-it-works">
+    <section className="w-full px-4 max-sm:px-8 py-14 lg:px-16 flex flex-col justify-center items-center text-[#373743] relative overflow-hidden " id="how-it-works">
       {/* Animated Background */}
       <div className="absolute inset-0 bg-gradient-to-r from-[#F8F8FC] via-[#f0f0ff] to-[#e8e8ff] animate-gradient-x"></div>
 
@@ -25,7 +25,7 @@ function UseMyCardWorking() {
             How UseMyCard <span className="text-[#7B68EE]">Works</span>
           </h2>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Follow these simple steps to start sharing card benefits securely with your
+            Follow these simple steps to start sharing card benefits securely with your <br />
             trusted circle.
           </p>
         </div>
@@ -113,16 +113,16 @@ function UseMyCardWorking() {
           {/* Right Section - Logo */}
           <div className="relative">
             <div className="relative z-10 transform transition-all duration-500">
-              <div className="w-full h-[600px]  rounded-2xl flex items-center justify-center bg-gradient-to-br from-[#7B68EE]/20 to-[#9370DB]/20">
+              <div className="w-full h-[550px]  rounded-2xl flex items-center justify-center bg-gradient-to-br from-[#7B68EE]/20 to-[#9370DB]/20 max-sm:px-4 py-3 max-sm:h-[500px]">
                 <div className="text-center">
                   <img 
                     src={logo} 
                     alt="UseMyCard" 
-                    className="w-[400px] h-[400px] object-contain transform transition-transform duration-300"
+                    className="w-[340px] h-[340px] object-contain transform transition-transform duration-300"
                   />
-                  <div className="mt-8 space-y-4">
+                  <div className="mt-8 space-y-4 max-sm:relative bottom-20">
                     <div className="flex items-center justify-center gap-4">
-                      <i className="fas fa-shield-check text-[#7B68EE] text-2xl"></i>
+                      <i className="fas fa-shield text-[#7B68EE] text-2xl"></i>
                       <span className="text-lg font-semibold text-[#373743]">Secure Sharing</span>
                     </div>
                     <div className="flex items-center justify-center gap-4">

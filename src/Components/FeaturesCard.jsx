@@ -1,83 +1,70 @@
 function FeaturesCard() {
+  const features = [
+    {
+      icon: "shield-halved",
+      title: "Maximum Security",
+      description: "Share benefits without exposing sensitive card information"
+    },
+    {
+      icon: "users",
+      title: "Trusted Circles",
+      description: "Create groups with family and friends to share benefits"
+    },
+    {
+      icon: "gift",
+      title: "Maximize Benefits",
+      description: "Get the most from your premium cards by sharing perks"
+    },
+    {
+      icon: "chart-line",
+      title: "Smart Analytics",
+      description: "Track spending patterns and optimize card usage"
+    },
+    {
+      icon: "clock",
+      title: "Real-time Monitoring",
+      description: "Monitor transactions and set spending limits instantly"
+    },
+    {
+      icon: "bell",
+      title: "Instant Notifications",
+      description: "Get alerts for all transactions and important updates"
+    }
+  ];
+
   return (
-    <section className="w-full min-h-screen pt-4b-12 px-4 md:px-8 lg:px-16 flex justify-center items-center text-[#373743] relative overflow-hidden" id="features">
-      {/* Animated Background */}
-      <div className="absolute inset-0 bg-gradient-to-r from-[#F8F8FC] via-[#f0f0ff] to-[#e8e8ff] animate-gradient-x"></div>
-
-      {/* Floating Elements */}
-      <div className="absolute top-20 right-20 w-32 h-32 bg-gradient-to-r from-[#907CE2]/20 to-[#7B68EE]/20 rounded-full blur-xl animate-float"></div>
-      <div
-        className="absolute bottom-20 left-20 w-40 h-40 bg-gradient-to-r from-[#907CE2]/20 to-[#9370DB]/20 rounded-full blur-xl animate-float"
-        style={{ animationDelay: "2s" }}
-      ></div>
-      <div
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 bg-gradient-to-r from-[#907CE2]/10 to-[#8A2BE2]/10 rounded-full blur-2xl animate-float"
-        style={{ animationDelay: "1s" }}
-      ></div>
-
-      {/* Main Content */}
-      <div className="max-w-[1200px] w-full my-0 mx-auto z-10 absolute top-24">
-        <div className="text-center mb-12 transform transition-all duration-500 hover:scale-105">
-          <h2 className="text-4xl font-bold mb-4 animate-fade-in">
-            Features That Build <span className="text-[#7B68EE]">Trust</span>
+    <section className="w-full py-16 px-4 sm:px-6 lg:px-8 bg-[#F8F8FC]" id="features">
+      <div className="max-w-7xl mx-auto">
+        <div className="text-center mb-12 md:mb-16">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4">
+            Powerful <span className="text-[#7B68EE]">Features</span>
           </h2>
-          <p className="text-lg text-center text-gray-600 animate-fade-in-up">
-            UseMyCard is designed with privacy and simplicity at its core,
-            helping you <br /> share card benefits without sharing sensitive
-            information.
+          <p className="text-base sm:text-lg text-gray-600 max-w-2xl mx-auto">
+            Everything you need to share your card benefits securely and efficiently
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          <div className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 group">
-            <div className="relative">
-              <i className="fas fa-user-shield text-3xl text-[#7B68EE] mb-4 block transform transition-transform duration-300 group-hover:scale-110"></i>
-              <i className="fas fa-shield-halved text-xl text-[#7B68EE]/30 absolute -top-2 -right-2 transform rotate-12"></i>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+          {features.map((feature, index) => (
+            <div
+              key={index}
+              className="bg-white rounded-xl md:rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 group"
+            >
+              <div className="flex items-start gap-4">
+                <div className="p-3 bg-[#7B68EE]/10 rounded-xl group-hover:bg-[#7B68EE]/20 transition-colors duration-300">
+                  <i className={`fas fa-${feature.icon} text-[#7B68EE] text-xl md:text-2xl`}></i>
+                </div>
+                <div>
+                  <h3 className="font-bold text-lg md:text-xl text-[#1F2937] group-hover:text-[#7B68EE] transition-colors duration-300 mb-2">
+                    {feature.title}
+                  </h3>
+                  <p className="text-sm md:text-base text-gray-600">
+                    {feature.description}
+                  </p>
+                </div>
+              </div>
             </div>
-            <h3 className="text-xl font-semibold mb-3 group-hover:text-[#7B68EE] transition-colors duration-300">
-              Simple, Safe <br /> Onboarding
-            </h3>
-            <p className="text-gray-600">
-              Create your account with minimal information. No card numbers are
-              ever shared on our platform.
-            </p>
-          </div>
-
-          <div className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 group">
-            <div className="relative">
-              <i className="fas fa-users-gear text-3xl text-[#7B68EE] mb-4 block transform transition-transform duration-300 group-hover:scale-110"></i>
-              <i className="fas fa-user-plus text-xl text-[#7B68EE]/30 absolute -top-2 -right-2 transform rotate-12"></i>
-            </div>
-            <h3 className="text-xl font-semibold mb-3 group-hover:text-[#7B68EE] transition-colors duration-300">Build Your Circle</h3>
-            <p className="text-gray-600">
-              Invite trusted friends and family to join your circle. Accept or
-              reject requests with ease.
-            </p>
-          </div>
-
-          <div className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 group">
-            <div className="relative">
-              <i className="fas fa-chart-line text-3xl text-[#7B68EE] mb-4 block transform transition-transform duration-300 group-hover:scale-110"></i>
-              <i className="fas fa-chart-simple text-xl text-[#7B68EE]/30 absolute -top-2 -right-2 transform rotate-12"></i>
-            </div>
-            <h3 className="text-xl font-semibold mb-3 group-hover:text-[#7B68EE] transition-colors duration-300">Track Card Usage</h3>
-            <p className="text-gray-600">
-              Log when you use someone's card offer. Keep track of amounts and
-              purpose for transparency.
-            </p>
-          </div>
-
-          <div className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 group">
-            <div className="relative">
-              <i className="fas fa-bell text-3xl text-[#7B68EE] mb-4 block transform transition-transform duration-300 group-hover:scale-110"></i>
-              <i className="fas fa-envelope text-xl text-[#7B68EE]/30 absolute -top-2 -right-2 transform rotate-12"></i>
-            </div>
-            <h3 className="text-xl font-semibold mb-3 group-hover:text-[#7B68EE] transition-colors duration-300">Stay Notified</h3>
-            <p className="text-gray-600">
-              Get notifications when someone uses your shared card for an offer,
-              helping you stay informed.
-            </p>
-          </div>
+          ))}
         </div>
       </div>
     </section>

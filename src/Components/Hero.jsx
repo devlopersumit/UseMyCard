@@ -1,7 +1,7 @@
 import React from "react";
 
 const Hero = () => (
-  <div className="w-full min-h-screen pt-3 pb-12 px-4 md:px-8 lg:px-16 flex justify-center items-center text-[#373743] relative overflow-hidden">
+  <div className="w-full min-h-screen pt-4 pb-2 px-4 md:px-8 lg:px-16 flex justify-center items-center text-[#373743] relative overflow-hidden">
     {/* Animated Background */}
     <div className="absolute inset-0 bg-gradient-to-r from-[#F8F8FC] via-[#f0f0ff] to-[#e8e8ff] animate-gradient-x"></div>
     
@@ -25,7 +25,7 @@ const Hero = () => (
             UseMyCard helps you create trusted circles to share card benefits with friends and family without compromising security. Track usage, manage offers, and save more together.
           </p>
           
-          <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+          <div className="flex flex-col max-sm:flex-row gap-4 justify-center lg:justify-start">
             <button className="px-8 py-3 rounded-full font-semibold text-white bg-[#907CE2] hover:bg-[#7B68EE] transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 flex items-center gap-2">
               <i className="fas fa-rocket"></i>
               Get Started

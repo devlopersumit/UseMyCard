@@ -31,7 +31,7 @@ function FAQ() {
     setOpenIndex(openIndex === index ? null : index);
   };
     return(
-        <div className="w-full min-h-screen bg-[#F0F0FF] pt-[30px] md:pt-[50px] px-4 md:px-8">
+        <div className="w-full min-h-screen bg-[#F0F0FF]  md:pt-[50px] px-4 md:px-8">
          <div className="max-w-[800px] mx-auto" id="FAQ">
             <h1 className="text-[28px] md:text-[36px] leading-[32px] md:leading-[40px] font-bold tracking-normal mb-[30px] md:mb-[50px] text-center">Frequently Asked <span className="text-[#907CE2]">Questions</span></h1>
       {faqs.map((faq, index) => (
