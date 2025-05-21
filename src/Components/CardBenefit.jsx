@@ -1,6 +1,6 @@
 function CardBenefit() {
   return (
-    <div className="w-full min-h-screen pt-16 md:pt-24 pb-8 md:pb-16 px-4 md:px-8 lg:px-16 flex justify-center items-center text-[#373743] relative overflow-hidden">
+    <div className="w-full min-h-screen pt-16 md:pt-24 pb-8 md:pb-16 px-4 md:px-8 lg:px-16 flex justify-center items-center text-[#373743] relative overflow-hidden" id="benifits">
       {/* Animated Background */}
       <div className="absolute inset-0 bg-gradient-to-r from-[#F8F8FC] via-[#f0f0ff] to-[#e8e8ff] animate-gradient-x"></div>
 

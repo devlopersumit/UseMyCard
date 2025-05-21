@@ -3,7 +3,7 @@ import logo from "../assets/Updated-UseMyCard.png";
 
 function UseMyCardWorking() {
   return (
-    <section className="w-full min-h-screen pt-2 pb-12 px-4 md:px-8 lg:px-16 flex flex-col justify-center items-center text-[#373743] relative overflow-hidden" id="how-it-works">
+    <section className="w-full min-h-screen pt-2 pb-12 px-4 md:px-8 py-14 lg:px-16 flex flex-col justify-center items-center text-[#373743] relative overflow-hidden " id="how-it-works">
       {/* Animated Background */}
       <div className="absolute inset-0 bg-gradient-to-r from-[#F8F8FC] via-[#f0f0ff] to-[#e8e8ff] animate-gradient-x"></div>
 
