@@ -25,8 +25,8 @@ const Hero = () => (
             UseMyCard helps you create trusted circles to share card benefits with friends and family without compromising security. Track usage, manage offers, and save more together.
           </p>
           
-          <div className="flex flex-col max-sm:flex-row gap-4 justify-center lg:justify-start">
-            <button className="px-8 py-3 rounded-full font-semibold text-white bg-[#907CE2] hover:bg-[#7B68EE] transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 flex items-center gap-2">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+            <button className="w-[200px] px-8 py-3 rounded-full font-semibold text-white bg-[#907CE2] hover:bg-[#7B68EE] transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 flex items-center gap-2">
               <i className="fas fa-rocket"></i>
               Get Started
             </button>
