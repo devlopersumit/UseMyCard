@@ -57,7 +57,6 @@ function Dashboard() {
           </div>
         </div>
 
-      
         <div className="bg-white rounded-xl shadow-sm p-6">
           <h2 className="text-xl font-semibold text-[#373743] mb-4">Recent Activity</h2>
           <div className="space-y-4">

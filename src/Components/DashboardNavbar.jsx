@@ -1,5 +1,5 @@
 import logo from "../assets/Updated-UseMyCard.png";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { createClient } from "@supabase/supabase-js";
 import { useState } from "react";
 
@@ -59,49 +59,49 @@ function DashboardNavbar() {
             </div>
 
             {/* Mobile Menu */}
-            {isMenuOpen && (
-                <div className="md:hidden bg-white border-t">
-                    <div className="px-4 py-2 space-y-1">
-                        <Link 
-                            to="/dashboard" 
-                            className="block py-2 px-4 text-gray-600 hover:text-[#907CE2] hover:bg-gray-50 rounded-lg transition-colors"
-                            onClick={() => setIsMenuOpen(false)}
-                        >
-                            Dashboard
-                        </Link>
-                        <Link 
-                            to="/my-cards" 
-                            className="block py-2 px-4 text-gray-600 hover:text-[#907CE2] hover:bg-gray-50 rounded-lg transition-colors"
-                            onClick={() => setIsMenuOpen(false)}
-                        >
-                            My Cards
-                        </Link>
-                        <Link 
-                            to="/usage-logs" 
-                            className="block py-2 px-4 text-gray-600 hover:text-[#907CE2] hover:bg-gray-50 rounded-lg transition-colors"
-                            onClick={() => setIsMenuOpen(false)}
-                        >
-                            Usage Logs
-                        </Link>
-                        <Link 
-                            to="/add-card" 
-                            className="block py-2 px-4 text-gray-600 hover:text-[#907CE2] hover:bg-gray-50 rounded-lg transition-colors"
-                            onClick={() => setIsMenuOpen(false)}
-                        >
-                            Add Card
-                        </Link>
-                        <button 
-                            onClick={() => {
-                                handleLogout();
-                                setIsMenuOpen(false);
-                            }}
-                            className="w-full text-left py-2 px-4 text-red-500 hover:bg-red-50 rounded-lg transition-colors"
-                        >
-                            Logout
-                        </button>
-                    </div>
+            <div
+                className={`md:hidden absolute top-full left-0 right-0 bg-white shadow-lg transition-all duration-300 z-[1100] ${isMenuOpen ? "opacity-100 visible" : "opacity-0 invisible"}`}
+            >
+                <div className="flex flex-col p-4 space-y-4">
+                    <Link 
+                        to="/dashboard" 
+                        className="block py-2 px-4 text-gray-600 hover:text-[#907CE2] hover:bg-gray-50 rounded-lg transition-colors"
+                        onClick={() => setIsMenuOpen(false)}
+                    >
+                        Dashboard
+                    </Link>
+                    <Link 
+                        to="/my-cards" 
+                        className="block py-2 px-4 text-gray-600 hover:text-[#907CE2] hover:bg-gray-50 rounded-lg transition-colors"
+                        onClick={() => setIsMenuOpen(false)}
+                    >
+                        My Cards
+                    </Link>
+                    <Link 
+                        to="/usage-logs" 
+                        className="block py-2 px-4 text-gray-600 hover:text-[#907CE2] hover:bg-gray-50 rounded-lg transition-colors"
+                        onClick={() => setIsMenuOpen(false)}
+                    >
+                        Usage Logs
+                    </Link>
+                    <Link 
+                        to="/add-card" 
+                        className="block py-2 px-4 text-gray-600 hover:text-[#907CE2] hover:bg-gray-50 rounded-lg transition-colors"
+                        onClick={() => setIsMenuOpen(false)}
+                    >
+                        Add Card
+                    </Link>
+                    <button 
+                        onClick={() => {
+                            handleLogout();
+                            setIsMenuOpen(false);
+                        }}
+                        className="w-full text-left py-2 px-4 text-red-500 hover:bg-red-50 rounded-lg transition-colors"
+                    >
+                        Logout
+                    </button>
                 </div>
-            )}
+            </div>
         </nav>
     );
 }

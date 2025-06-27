@@ -61,7 +61,15 @@ const Home = () => (
 function App() {
   const [user, setUser] = useState(null);
   const location = useLocation();
-  const isAuthPage = location.pathname !== "/";
+
+  // List of dashboard/protected routes
+  const dashboardRoutes = [
+    "/dashboard",
+    "/my-cards",
+    "/usage-logs",
+    "/add-card"
+  ];
+  const isDashboardPage = dashboardRoutes.some((route) => location.pathname.startsWith(route));
 
   useEffect(() => {
     supabase.auth.getUser().then(({ data: { user } }) => {
@@ -83,7 +91,7 @@ function App() {
 
   return (
     <>
-      {isAuthPage ? <DashboardNavbar /> : <Navbar />}
+      {isDashboardPage ? <DashboardNavbar /> : <Navbar />}
       <Routes>
         <Route path="/" element={<Home />} />
         <Route

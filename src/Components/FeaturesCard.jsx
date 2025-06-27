@@ -33,7 +33,7 @@ function FeaturesCard() {
   ];
 
   return (
-    <section className="w-full py-16 px-4 sm:px-6 lg:px-8 bg-[#F8F8FC]" id="features">
+    <section className="w-full py-16 px-4 sm:px-6 lg:px-8 bg-[#F8F8FC]" id="features-card">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-12 md:mb-16">
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4">
