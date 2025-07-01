@@ -1,11 +1,24 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { CardContext } from '../providers/CardContext';
 
 function MyCards() {
-  const { cards } = useContext(CardContext);
-  // Only show user-added cards (isUserCard: true)
-  const userCards = cards.filter(card => card.isUserCard);
+  const { cards, deleteCard, editCard } = useContext(CardContext);
+  const [editIdx, setEditIdx] = useState(null);
+  const [editData, setEditData] = useState({ name: '', bank: '', offer: '', type: 'Credit Card' });
+
+  const startEdit = (id, card) => {
+    setEditIdx(id);
+    setEditData({ name: card.Card_Name || card.name, bank: card.Bank_Name || card.bank, offer: card.Offer || card.offer || '', type: card.Card_Type || card.type });
+  };
+  const handleEditChange = (e) => {
+    setEditData({ ...editData, [e.target.name]: e.target.value });
+  };
+  const saveEdit = async (id) => {
+    await editCard(id, editData);
+    setEditIdx(null);
+  };
+  const cancelEdit = () => setEditIdx(null);
 
   return (
     <div className="pt-20 px-4 md:px-8 lg:px-16">
@@ -21,31 +34,72 @@ function MyCards() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {userCards.length === 0 ? (
+          {cards.length === 0 ? (
             <div className="col-span-full text-center text-gray-500">No cards added yet.</div>
-          ) : userCards.map((card, idx) => (
-            <div key={idx} className="bg-white rounded-xl shadow-sm p-6 hover:shadow-md transition-shadow">
-              <div className="flex justify-between items-start mb-4">
+          ) : cards.map((card) => (
+            <div key={card.id} className="bg-white rounded-xl shadow-sm p-6 hover:shadow-md transition-shadow">
+              {editIdx === card.id ? (
                 <div>
-                  <h3 className="text-xl font-semibold text-[#373743]">{card.name}</h3>
-                  <p className="text-gray-600">{card.type}</p>
-                  <p className="text-gray-500 text-sm mt-1">{card.bank}</p>
-                  {card.offer && <p className="text-[#907CE2] text-sm mt-1">Offer: {card.offer}</p>}
+                  <input
+                    className="w-full mb-2 px-3 py-2 border rounded"
+                    name="name"
+                    value={editData.name}
+                    onChange={handleEditChange}
+                  />
+                  <input
+                    className="w-full mb-2 px-3 py-2 border rounded"
+                    name="bank"
+                    value={editData.bank}
+                    onChange={handleEditChange}
+                  />
+                  <input
+                    className="w-full mb-2 px-3 py-2 border rounded"
+                    name="offer"
+                    value={editData.offer}
+                    onChange={handleEditChange}
+                  />
+                  <select
+                    className="w-full mb-2 px-3 py-2 border rounded"
+                    name="type"
+                    value={editData.type}
+                    onChange={handleEditChange}
+                  >
+                    <option value="Credit Card">Credit Card</option>
+                    <option value="Debit Card">Debit Card</option>
+                    <option value="Other">Other</option>
+                  </select>
+                  <div className="flex gap-2 mt-2">
+                    <button className="px-4 py-1 bg-[#907CE2] text-white rounded" onClick={() => saveEdit(card.id)}>Save</button>
+                    <button className="px-4 py-1 bg-gray-300 rounded" onClick={cancelEdit}>Cancel</button>
+                  </div>
                 </div>
-                <span className={`px-3 py-1 rounded-full text-sm ${
-                  card.status === 'Active' ? 'bg-green-100 text-green-800' : 'bg-gray-100 text-gray-800'
-                }`}>
-                  {card.status}
-                </span>
-              </div>
-
+              ) : (
+                <>
+                  <div className="flex justify-between items-start mb-4">
+                    <div>
+                      <h3 className="text-xl font-semibold text-[#373743]">{card.name}</h3>
+                      <p className="text-gray-600">{card.type}</p>
+                      <p className="text-gray-500 text-sm mt-1">{card.bank}</p>
+                      {card.offer && <p className="text-[#907CE2] text-sm mt-1">Offer: {card.offer}</p>}
+                    </div>
+                    <span className={`px-3 py-1 rounded-full text-sm ${
+                      card.status === 'Active' ? 'bg-green-100 text-green-800' : 'bg-gray-100 text-gray-800'
+                    }`}>
+                      {card.status}
+                    </span>
+                  </div>
+                  <div className="flex gap-2 mb-2">
+                    <button className="px-3 py-1 bg-yellow-400 text-white rounded" onClick={() => startEdit(card.id, card)}>Edit</button>
+                    <button className="px-3 py-1 bg-red-500 text-white rounded" onClick={() => { if(window.confirm('Delete this card?')) deleteCard(card.id); }}>Delete</button>
+                  </div>
+                </>
+              )}
               <div className="space-y-3">
                 <div className="flex justify-between items-center">
                   <span className="text-gray-600">Shared With</span>
                   <span className="font-medium">{card.sharedWith} people</span>
                 </div>
               </div>
-
               <div className="mt-6 flex gap-3">
                 <button className="flex-1 px-4 py-2 border border-[#907CE2] text-[#907CE2] rounded-lg hover:bg-[#907CE2]/10 transition-colors">
                   <i className="fas fa-users mr-2"></i>

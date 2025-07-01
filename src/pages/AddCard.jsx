@@ -6,24 +6,25 @@ function AddCard() {
   const [bankName, setBankName] = useState('');
   const [offer, setOffer] = useState('');
   const [success, setSuccess] = useState(false);
+  const [type, setType] = useState('Credit Card');
   const { addCard } = useContext(CardContext);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    addCard({
+    const result = await addCard({
       name: cardName,
       bank: bankName,
       offer: offer,
-      type: 'Credit Card', // or let user select type in future
-      sharedWith: 0,
-      status: 'Active',
-      isUserCard: true,
+      type: type
     });
-    setSuccess(true);
-    setCardName('');
-    setBankName('');
-    setOffer('');
-    setTimeout(() => setSuccess(false), 2000);
+    if (result !== false) {
+      setSuccess(true);
+      setCardName('');
+      setBankName('');
+      setOffer('');
+      setType('Credit Card');
+      setTimeout(() => setSuccess(false), 2000);
+    }
   };
 
   return (
@@ -63,6 +64,19 @@ function AddCard() {
               onChange={e => setOffer(e.target.value)}
             />
           </div>
+          <div>
+            <label className="block text-gray-700 font-medium mb-2">Card Type</label>
+            <select
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#907CE2]"
+              value={type}
+              onChange={e => setType(e.target.value)}
+              required
+            >
+              <option value="Credit Card">Credit Card</option>
+              <option value="Debit Card">Debit Card</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
           <button
             type="submit"
             className="w-full py-2 rounded-full font-semibold text-white bg-[#907CE2] hover:bg-[#7B68EE] transition-all duration-300 shadow-lg mt-2"
@@ -70,7 +84,9 @@ function AddCard() {
             Add Card
           </button>
           {success && (
-            <div className="text-green-600 text-center font-medium mt-2">Card added successfully!</div>
+            <div className="transition-all duration-500 opacity-100 text-green-600 text-center font-medium mt-4 animate-fade-in">
+              Card added successfully!
+            </div>
           )}
         </form>
       </div>

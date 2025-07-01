@@ -93,7 +93,7 @@ function App() {
     <>
       {isDashboardPage ? <DashboardNavbar /> : <Navbar />}
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={user ? <Navigate to="/dashboard" /> : <Home />} />
         <Route
           path="/dashboard"
           element={

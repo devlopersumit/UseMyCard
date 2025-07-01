@@ -59,7 +59,6 @@ function Navbar() {
     }
 
     try {
-      // let result;
       if (modalType === "login") {
         const { error } = await supabase.auth.signInWithPassword({
           email,
@@ -70,7 +69,8 @@ function Navbar() {
         const { error } = await supabase.auth.signUp({ email, password });
         if (error) throw error;
       }
-      closeModal();
+      navigate("/dashboard");
+      
     } catch (err) {
       setError(err.message);
     }
@@ -81,6 +81,7 @@ function Navbar() {
       provider: "google",
     });
     if (error) setError(error.message);
+    else navigate("/dashboard");
   }
 
   async function handleLogout() {
