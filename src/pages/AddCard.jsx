@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext } from 'react';
 import { CardContext } from '../providers/CardContext';
 
 function AddCard() {
@@ -11,12 +11,14 @@ function AddCard() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log("Submitting card:", { cardName, bankName, offer, type });
     const result = await addCard({
       name: cardName,
       bank: bankName,
       offer: offer,
       type: type
     });
+    console.log("addCard result:", result);
     if (result !== false) {
       setSuccess(true);
       setCardName('');
@@ -94,4 +96,4 @@ function AddCard() {
   )
 }
 
-export default AddCard
+export default AddCard;

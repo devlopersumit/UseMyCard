@@ -1,45 +1,46 @@
 import React, { useContext, useState } from 'react';
-import { Link } from 'react-router-dom';
 import { CardContext } from '../providers/CardContext';
 
 function MyCards() {
-  const { cards, deleteCard, editCard } = useContext(CardContext);
+  const { cards, editCard, deleteCard } = useContext(CardContext);
   const [editIdx, setEditIdx] = useState(null);
   const [editData, setEditData] = useState({ name: '', bank: '', offer: '', type: 'Credit Card' });
 
-  const startEdit = (id, card) => {
-    setEditIdx(id);
-    setEditData({ name: card.Card_Name || card.name, bank: card.Bank_Name || card.bank, offer: card.Offer || card.offer || '', type: card.Card_Type || card.type });
+  const startEdit = (card) => {
+    setEditIdx(card.id);
+    setEditData({
+      name: card.name,
+      bank: card.bank,
+      offer: card.offer || '',
+      type: card.type || 'Credit Card',
+    });
   };
+
   const handleEditChange = (e) => {
     setEditData({ ...editData, [e.target.name]: e.target.value });
   };
+
   const saveEdit = async (id) => {
     await editCard(id, editData);
     setEditIdx(null);
   };
+
   const cancelEdit = () => setEditIdx(null);
 
   return (
-    <div className="pt-20 px-4 md:px-8 lg:px-16">
-      <div className="max-w-7xl mx-auto">
-        <div className="flex justify-between items-center mb-10 mt-10">
-          <h1 className="text-3xl font-bold text-[#373743]">My Cards</h1>
-         <Link to = "/add-card">
-          <button className="px-6 py-2 bg-[#907CE2] text-white rounded-full hover:bg-[#7B68EE] transition-colors">
-            <i className="fas fa-plus mr-2"></i>
-            Add New Card
-          </button>
-            </Link>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {cards.length === 0 ? (
-            <div className="col-span-full text-center text-gray-500">No cards added yet.</div>
-          ) : cards.map((card) => (
-            <div key={card.id} className="bg-white rounded-xl shadow-sm p-6 hover:shadow-md transition-shadow">
+    <div className="pt-24 min-h-screen bg-[#F0F0FF] px-4">
+      <h2 className="text-3xl font-bold text-[#373743] mb-8 text-center">My Cards</h2>
+      {cards.length === 0 ? (
+        <div className="text-center text-gray-500">No cards added yet.</div>
+      ) : (
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+          {cards.map(card => (
+            <div
+              key={card.id}
+              className="bg-white rounded-2xl shadow-lg p-6 flex flex-col items-start transition-transform hover:scale-105"
+            >
               {editIdx === card.id ? (
-                <div>
+                <>
                   <input
                     className="w-full mb-2 px-3 py-2 border rounded"
                     name="name"
@@ -72,44 +73,27 @@ function MyCards() {
                     <button className="px-4 py-1 bg-[#907CE2] text-white rounded" onClick={() => saveEdit(card.id)}>Save</button>
                     <button className="px-4 py-1 bg-gray-300 rounded" onClick={cancelEdit}>Cancel</button>
                   </div>
-                </div>
+                </>
               ) : (
                 <>
-                  <div className="flex justify-between items-start mb-4">
-                    <div>
-                      <h3 className="text-xl font-semibold text-[#373743]">{card.name}</h3>
-                      <p className="text-gray-600">{card.type}</p>
-                      <p className="text-gray-500 text-sm mt-1">{card.bank}</p>
-                      {card.offer && <p className="text-[#907CE2] text-sm mt-1">Offer: {card.offer}</p>}
-                    </div>
-                    <span className={`px-3 py-1 rounded-full text-sm ${
-                      card.status === 'Active' ? 'bg-green-100 text-green-800' : 'bg-gray-100 text-gray-800'
-                    }`}>
-                      {card.status}
-                    </span>
+                  <div className="w-full flex justify-between items-center mb-2">
+                    <span className="text-lg font-semibold text-[#907CE2]">{card.name}</span>
+                    <span className="text-xs bg-[#F0F0FF] text-[#373743] px-2 py-1 rounded">{card.type}</span>
                   </div>
-                  <div className="flex gap-2 mb-2">
-                    <button className="px-3 py-1 bg-yellow-400 text-white rounded" onClick={() => startEdit(card.id, card)}>Edit</button>
-                    <button className="px-3 py-1 bg-red-500 text-white rounded" onClick={() => { if(window.confirm('Delete this card?')) deleteCard(card.id); }}>Delete</button>
+                  <div className="text-gray-700 mb-1">Bank: <span className="font-medium">{card.bank}</span></div>
+                  {card.offer && (
+                    <div className="text-green-600 font-medium mb-2">Offer: {card.offer}</div>
+                  )}
+                  <div className="flex gap-2 mt-4">
+                    <button className="px-4 py-1 bg-yellow-400 text-white rounded" onClick={() => startEdit(card)}>Edit</button>
+                    <button className="px-4 py-1 bg-red-500 text-white rounded" onClick={() => { if(window.confirm('Delete this card?')) deleteCard(card.id); }}>Delete</button>
                   </div>
                 </>
               )}
-              <div className="space-y-3">
-                <div className="flex justify-between items-center">
-                  <span className="text-gray-600">Shared With</span>
-                  <span className="font-medium">{card.sharedWith} people</span>
-                </div>
-              </div>
-              <div className="mt-6 flex gap-3">
-                <button className="flex-1 px-4 py-2 border border-[#907CE2] text-[#907CE2] rounded-lg hover:bg-[#907CE2]/10 transition-colors">
-                  <i className="fas fa-users mr-2"></i>
-                  Manage Users
-                </button>
-              </div>
             </div>
           ))}
         </div>
-      </div>
+      )}
     </div>
   );
 }
