@@ -1,12 +1,73 @@
-# React + Vite
+# UseMyCard
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern web application to manage, track, and understand your card benefits—all in one place.
 
-Currently, two official plugins are available:
+## 🚀 Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Add and manage your cards
+- View card benefits and usage logs
+- User authentication and secure data storage
+- Responsive dashboard and clean UI
+- FAQ and support section
 
-## Expanding the ESLint configuration
+## 🛠️ Tech Stack
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- **React** (with functional components and hooks)
+- **Vite** (for fast development and builds)
+- **Tailwind CSS** (utility-first styling)
+- **Supabase** (backend/database and authentication)
+- **Context API** (global state management)
+
+## 📦 Installation
+
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/your-username/usemycard.git
+   cd usemycard
+   ```
+
+2. **Install dependencies:**
+   ```bash
+   npm install
+   ```
+
+3. **Set up Supabase:**
+   - Create a project at [Supabase](https://supabase.com/)
+   - Copy your project URL and anon/public API key
+   - Replace the placeholders in `src/supabaseClient.js`:
+     ```js
+     const supabaseUrl = "https://your-project.supabase.co";
+     const supabaseAnonKey = "your-anon-key";
+     ```
+
+4. **Start the development server:**
+   ```bash
+   npm run dev
+   ```
+
+5. **Open in your browser:**
+   ```
+   http://localhost:5173
+   ```
+
+## 📁 Project Structure
+
+```
+src/
+  Components/      # Reusable UI components
+  pages/           # Main app pages (Dashboard, AddCard, etc.)
+  providers/       # Context providers (global state)
+  supabaseClient.js# Supabase client setup
+  App.jsx          # Main app component
+  main.jsx         # Entry point
+```
+
+## 🤓 Key Concepts
+
+- **Context API** for global state (see `src/providers/CardContext.jsx`)
+- **Supabase** for backend and authentication (see `src/supabaseClient.js`)
+- **Tailwind CSS** for rapid UI development
+
+## 📄 License
+
+[MIT](LICENSE)
