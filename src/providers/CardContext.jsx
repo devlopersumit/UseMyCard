@@ -18,9 +18,15 @@ export function CardContextProvider({ children }) {
   }
 
   async function refetchCards() {
+    const userId = await getCurrentUserId();
+    if (!userId) {
+      setCards([]);
+      return;
+    }
     const { data, error } = await supabase
       .from('Card-Details')
       .select('*')
+      .eq('user_id', userId)
       .order('id', { ascending: false });
     if (!error) setCards(data || []);
     else console.error('Supabase fetch error:', error);
@@ -44,6 +50,11 @@ export function CardContextProvider({ children }) {
   }, [shouldRefetch]);
 
   const addCard = async (card) => {
+    const userId = await getCurrentUserId();
+    if (!userId) {
+      alert('User not authenticated');
+      return false;
+    }
     console.log('addCard called with:', card);
     const { data, error } = await supabase
       .from('Card-Details')
@@ -52,7 +63,8 @@ export function CardContextProvider({ children }) {
           Card_Name: card.name,
           Bank_Name: card.bank,
           Card_Type: card.type,
-          Offer: card.offer
+          Offer: card.offer,
+          user_id: userId // Store the current user's ID
         }
       ]);
     console.log('Supabase insert result:', { data, error });
