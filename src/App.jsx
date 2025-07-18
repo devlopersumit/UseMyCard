@@ -1,6 +1,6 @@
 import { Routes, Route, useLocation, Navigate } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { createClient } from "@supabase/supabase-js";
+import { supabase } from "./supabaseClient";
 import DashboardNavbar from "./Components/DashboardNavbar";
 
 //Landing Page Components
@@ -17,11 +17,6 @@ import Dashboard from "./pages/Dashboard";
 import MyCards from "./pages/MyCards";
 import UsageLogs from "./pages/UsageLogs";
 import AddCard from "./pages/AddCard";
-
-const supabase = createClient(
-  import.meta.env.VITE_SUPABASE_URL,
-  import.meta.env.VITE_SUPABASE_ANON_KEY
-);
 
 // Protected Route Component
 const ProtectedRoute = ({ children }) => {

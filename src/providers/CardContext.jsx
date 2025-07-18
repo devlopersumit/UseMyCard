@@ -1,12 +1,7 @@
 import React, { createContext, useState, useEffect } from 'react';
-import { createClient } from '@supabase/supabase-js';
+import { supabase } from '../supabaseClient';
 
 export const CardContext = createContext();
-
-const supabase = createClient(
-  "https://fbeychgiyiovoierqviw.supabase.co",
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZiZXljaGdpeWlvdm9pZXJxdml3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDcyMDU2NjIsImV4cCI6MjA2Mjc4MTY2Mn0.uPO5HSen1cx8bAjSxaxjv_7cjI7l_SP_OJLHc7-UmvI"
-);
 
 export function CardContextProvider({ children }) {
   const [cards, setCards] = useState([]);
@@ -50,12 +45,13 @@ export function CardContextProvider({ children }) {
   }, [shouldRefetch]);
 
   const addCard = async (card) => {
-    const userId = await getCurrentUserId();
-    if (!userId) {
-      alert('User not authenticated');
+    const { data: { user } } = await supabase.auth.getUser();
+    console.log("Current user:", user);
+    if (!user) {
+      alert('You must be logged in to add a card.');
       return false;
     }
-    console.log('addCard called with:', card);
+    const userId = user.id;
     const { data, error } = await supabase
       .from('Card-Details')
       .insert([
@@ -64,7 +60,7 @@ export function CardContextProvider({ children }) {
           Bank_Name: card.bank,
           Card_Type: card.type,
           Offer: card.offer,
-          user_id: userId // Store the current user's ID
+          user_id: userId
         }
       ]);
     console.log('Supabase insert result:', { data, error });

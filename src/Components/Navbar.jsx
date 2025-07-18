@@ -1,12 +1,7 @@
 import logo from "../assets/Updated-UseMyCard.png";
 import { useState, useRef, useEffect } from "react";
-import { createClient } from "@supabase/supabase-js";
+import { supabase } from "../supabaseClient";
 import { Link, useNavigate } from "react-router-dom";
-
-const supabase = createClient(
-  import.meta.env.VITE_SUPABASE_URL,
-  import.meta.env.VITE_SUPABASE_ANON_KEY
-);
 
 function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
