@@ -8,9 +8,15 @@ export default function InviteView() {
   const [error, setError] = useState('');
   const [card, setCard] = useState(null);
   const [user, setUser] = useState(null);
+  const [authMode, setAuthMode] = useState('login'); // 'login' or 'signup'
+  // Login form
   const [email, setEmail] = useState('');
-  const [loginLoading, setLoginLoading] = useState(false);
-  const [loginMessage, setLoginMessage] = useState('');
+  const [password, setPassword] = useState('');
+  // Signup form
+  const [signupEmail, setSignupEmail] = useState('');
+  const [signupPassword, setSignupPassword] = useState('');
+  const [signupConfirm, setSignupConfirm] = useState('');
+  const [authLoading, setAuthLoading] = useState(false);
 
   // Check auth state
   useEffect(() => {
@@ -70,42 +76,130 @@ export default function InviteView() {
   // Handle login form submit
   const handleLogin = async (e) => {
     e.preventDefault();
-    setLoginLoading(true);
-    setLoginMessage('');
+    setAuthLoading(true);
     setError('');
-    const { error } = await supabase.auth.signInWithOtp({ email });
+    const { error } = await supabase.auth.signInWithPassword({ email, password });
     if (error) {
       setError(error.message);
-    } else {
-      setLoginMessage('Check your email for the login link!');
     }
-    setLoginLoading(false);
+    setAuthLoading(false);
+  };
+
+  // Handle signup form submit
+  const handleSignup = async (e) => {
+    e.preventDefault();
+    setAuthLoading(true);
+    setError('');
+    if (signupPassword !== signupConfirm) {
+      setError('Passwords do not match.');
+      setAuthLoading(false);
+      return;
+    }
+    const { error } = await supabase.auth.signUp({ email: signupEmail, password: signupPassword });
+    if (error) {
+      setError(error.message);
+    }
+    setAuthLoading(false);
   };
 
   if (!user) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-[#F0F0FF] px-4">
         <div className="w-full max-w-md bg-white rounded-2xl shadow-lg p-8 mt-16">
-          <h2 className="text-2xl font-bold text-[#907CE2] mb-6 text-center">Login to View Shared Card</h2>
-          <form onSubmit={handleLogin} className="space-y-4">
-            <input
-              type="email"
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#907CE2]"
-              placeholder="Enter your email"
-              value={email}
-              onChange={e => setEmail(e.target.value)}
-              required
-              disabled={loginLoading}
-            />
-            <button
-              type="submit"
-              className="w-full bg-[#907CE2] hover:bg-[#7B68EE] text-white py-2 rounded-lg font-semibold transition-all duration-300"
-              disabled={loginLoading}
-            >
-              {loginLoading ? 'Sending...' : 'Send Magic Link'}
-            </button>
-          </form>
-          {loginMessage && <div className="mt-4 text-center text-green-600">{loginMessage}</div>}
+          <h2 className="text-2xl font-bold text-[#907CE2] mb-6 text-center">
+            {authMode === 'login' ? 'Login to View Shared Card' : 'Sign Up to View Shared Card'}
+          </h2>
+          {authMode === 'login' ? (
+            <form onSubmit={handleLogin} className="space-y-4">
+              <input
+                type="email"
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#907CE2]"
+                placeholder="Email"
+                value={email}
+                onChange={e => setEmail(e.target.value)}
+                required
+                disabled={authLoading}
+              />
+              <input
+                type="password"
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#907CE2]"
+                placeholder="Password"
+                value={password}
+                onChange={e => setPassword(e.target.value)}
+                required
+                disabled={authLoading}
+              />
+              <button
+                type="submit"
+                className="w-full bg-[#907CE2] hover:bg-[#7B68EE] text-white py-2 rounded-lg font-semibold transition-all duration-300"
+                disabled={authLoading}
+              >
+                {authLoading ? 'Logging in...' : 'Login'}
+              </button>
+            </form>
+          ) : (
+            <form onSubmit={handleSignup} className="space-y-4">
+              <input
+                type="email"
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#907CE2]"
+                placeholder="Email"
+                value={signupEmail}
+                onChange={e => setSignupEmail(e.target.value)}
+                required
+                disabled={authLoading}
+              />
+              <input
+                type="password"
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#907CE2]"
+                placeholder="Password"
+                value={signupPassword}
+                onChange={e => setSignupPassword(e.target.value)}
+                required
+                disabled={authLoading}
+              />
+              <input
+                type="password"
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#907CE2]"
+                placeholder="Confirm Password"
+                value={signupConfirm}
+                onChange={e => setSignupConfirm(e.target.value)}
+                required
+                disabled={authLoading}
+              />
+              <button
+                type="submit"
+                className="w-full bg-[#907CE2] hover:bg-[#7B68EE] text-white py-2 rounded-lg font-semibold transition-all duration-300"
+                disabled={authLoading}
+              >
+                {authLoading ? 'Signing up...' : 'Sign Up'}
+              </button>
+            </form>
+          )}
+          <div className="mt-4 text-center">
+            {authMode === 'login' ? (
+              <span>
+                First time here?{' '}
+                <button
+                  className="text-[#907CE2] underline hover:text-[#7B68EE]"
+                  onClick={() => { setAuthMode('signup'); setError(''); }}
+                  disabled={authLoading}
+                >
+                  Sign Up
+                </button>
+              </span>
+            ) : (
+              <span>
+                Already have an account?{' '}
+                <button
+                  className="text-[#907CE2] underline hover:text-[#7B68EE]"
+                  onClick={() => { setAuthMode('login'); setError(''); }}
+                  disabled={authLoading}
+                >
+                  Login
+                </button>
+              </span>
+            )}
+          </div>
           {error && <div className="mt-4 text-center text-red-500">{error}</div>}
         </div>
       </div>
