@@ -17,6 +17,7 @@ import Dashboard from "./pages/Dashboard";
 import MyCards from "./pages/MyCards";
 import UsageLogs from "./pages/UsageLogs";
 import AddCard from "./pages/AddCard";
+import InviteView from "./pages/InviteView";
 
 // Protected Route Component
 const ProtectedRoute = ({ children }) => {
@@ -121,6 +122,7 @@ function App() {
             </ProtectedRoute>
           }
         />
+        <Route path="/invite/:invite_code" element={<InviteView />} />
       </Routes>
     </>
   );
