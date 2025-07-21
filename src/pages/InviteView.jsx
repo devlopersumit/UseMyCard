@@ -102,6 +102,18 @@ export default function InviteView() {
     setAuthLoading(false);
   };
 
+  // Handle Google login
+  const handleGoogleLogin = async () => {
+    setAuthLoading(true);
+    setError('');
+    const { error } = await supabase.auth.signInWithOAuth({ provider: 'google' });
+    if (error) {
+      setError(error.message);
+      setAuthLoading(false);
+    }
+    // On success, Supabase will redirect and update auth state
+  };
+
   if (!user) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-[#F0F0FF] px-4">
@@ -110,70 +122,90 @@ export default function InviteView() {
             {authMode === 'login' ? 'Login to View Shared Card' : 'Sign Up to View Shared Card'}
           </h2>
           {authMode === 'login' ? (
-            <form onSubmit={handleLogin} className="space-y-4">
-              <input
-                type="email"
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#907CE2]"
-                placeholder="Email"
-                value={email}
-                onChange={e => setEmail(e.target.value)}
-                required
-                disabled={authLoading}
-              />
-              <input
-                type="password"
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#907CE2]"
-                placeholder="Password"
-                value={password}
-                onChange={e => setPassword(e.target.value)}
-                required
-                disabled={authLoading}
-              />
+            <>
+              <form onSubmit={handleLogin} className="space-y-4">
+                <input
+                  type="email"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#907CE2]"
+                  placeholder="Email"
+                  value={email}
+                  onChange={e => setEmail(e.target.value)}
+                  required
+                  disabled={authLoading}
+                />
+                <input
+                  type="password"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#907CE2]"
+                  placeholder="Password"
+                  value={password}
+                  onChange={e => setPassword(e.target.value)}
+                  required
+                  disabled={authLoading}
+                />
+                <button
+                  type="submit"
+                  className="w-full bg-[#907CE2] hover:bg-[#7B68EE] text-white py-2 rounded-lg font-semibold transition-all duration-300"
+                  disabled={authLoading}
+                >
+                  {authLoading ? 'Logging in...' : 'Login'}
+                </button>
+              </form>
               <button
-                type="submit"
-                className="w-full bg-[#907CE2] hover:bg-[#7B68EE] text-white py-2 rounded-lg font-semibold transition-all duration-300"
+                onClick={handleGoogleLogin}
+                className="w-full flex items-center justify-center gap-3 border border-gray-300 py-2 rounded-lg font-medium hover:bg-gray-50 transition-all duration-300 bg-[#2563EB] text-white hover:text-black mt-4"
                 disabled={authLoading}
               >
-                {authLoading ? 'Logging in...' : 'Login'}
+                <svg className="w-5 h-5" viewBox="0 0 48 48"><g><path d="M44.5 20H24v8.5h11.7C34.7 33.1 29.8 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c2.7 0 5.2.9 7.2 2.4l6.4-6.4C34.3 5.1 29.4 3 24 3 12.9 3 4 11.9 4 23s8.9 20 20 20c11 0 19.7-8 19.7-20 0-1.3-.1-2.7-.2-4z" fill="#FFC107"/><path d="M6.3 14.7l7 5.1C15.5 17.1 19.4 15 24 15c2.7 0 5.2.9 7.2 2.4l6.4-6.4C34.3 5.1 29.4 3 24 3c-7.2 0-13.2 4.1-16.3 10.1z" fill="#FF3D00"/><path d="M24 43c5.4 0 10.3-1.8 14.1-4.9l-6.5-5.3C29.7 34.9 27 36 24 36c-5.7 0-10.6-2.9-13.5-7.2l-6.6 5.1C7.8 39.1 15.3 43 24 43z" fill="#4CAF50"/><path d="M44.5 20H24v8.5h11.7c-1.2 3.2-4.2 5.5-7.7 5.5-2.2 0-4.2-.7-5.7-2.1l-6.6 5.1C17.4 41.1 20.5 43 24 43c6.6 0 12-5.4 12-12 0-.8-.1-1.5-.2-2.2z" fill="#1976D2"/></g></svg>
+                Login with Google
               </button>
-            </form>
+            </>
           ) : (
-            <form onSubmit={handleSignup} className="space-y-4">
-              <input
-                type="email"
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#907CE2]"
-                placeholder="Email"
-                value={signupEmail}
-                onChange={e => setSignupEmail(e.target.value)}
-                required
-                disabled={authLoading}
-              />
-              <input
-                type="password"
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#907CE2]"
-                placeholder="Password"
-                value={signupPassword}
-                onChange={e => setSignupPassword(e.target.value)}
-                required
-                disabled={authLoading}
-              />
-              <input
-                type="password"
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#907CE2]"
-                placeholder="Confirm Password"
-                value={signupConfirm}
-                onChange={e => setSignupConfirm(e.target.value)}
-                required
-                disabled={authLoading}
-              />
+            <>
+              <form onSubmit={handleSignup} className="space-y-4">
+                <input
+                  type="email"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#907CE2]"
+                  placeholder="Email"
+                  value={signupEmail}
+                  onChange={e => setSignupEmail(e.target.value)}
+                  required
+                  disabled={authLoading}
+                />
+                <input
+                  type="password"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#907CE2]"
+                  placeholder="Password"
+                  value={signupPassword}
+                  onChange={e => setSignupPassword(e.target.value)}
+                  required
+                  disabled={authLoading}
+                />
+                <input
+                  type="password"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#907CE2]"
+                  placeholder="Confirm Password"
+                  value={signupConfirm}
+                  onChange={e => setSignupConfirm(e.target.value)}
+                  required
+                  disabled={authLoading}
+                />
+                <button
+                  type="submit"
+                  className="w-full bg-[#907CE2] hover:bg-[#7B68EE] text-white py-2 rounded-lg font-semibold transition-all duration-300"
+                  disabled={authLoading}
+                >
+                  {authLoading ? 'Signing up...' : 'Sign Up'}
+                </button>
+              </form>
               <button
-                type="submit"
-                className="w-full bg-[#907CE2] hover:bg-[#7B68EE] text-white py-2 rounded-lg font-semibold transition-all duration-300"
+                onClick={handleGoogleLogin}
+                className="w-full flex items-center justify-center gap-3 border border-gray-300 py-2 rounded-lg font-medium hover:bg-gray-50 transition-all duration-300 bg-[#2563EB] text-white hover:text-black mt-4"
                 disabled={authLoading}
               >
-                {authLoading ? 'Signing up...' : 'Sign Up'}
+                <svg className="w-5 h-5" viewBox="0 0 48 48"><g><path d="M44.5 20H24v8.5h11.7C34.7 33.1 29.8 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c2.7 0 5.2.9 7.2 2.4l6.4-6.4C34.3 5.1 29.4 3 24 3 12.9 3 4 11.9 4 23s8.9 20 20 20c11 0 19.7-8 19.7-20 0-1.3-.1-2.7-.2-4z" fill="#FFC107"/><path d="M6.3 14.7l7 5.1C15.5 17.1 19.4 15 24 15c2.7 0 5.2.9 7.2 2.4l6.4-6.4C34.3 5.1 29.4 3 24 3c-7.2 0-13.2 4.1-16.3 10.1z" fill="#FF3D00"/><path d="M24 43c5.4 0 10.3-1.8 14.1-4.9l-6.5-5.3C29.7 34.9 27 36 24 36c-5.7 0-10.6-2.9-13.5-7.2l-6.6 5.1C7.8 39.1 15.3 43 24 43z" fill="#4CAF50"/><path d="M44.5 20H24v8.5h11.7c-1.2 3.2-4.2 5.5-7.7 5.5-2.2 0-4.2-.7-5.7-2.1l-6.6 5.1C17.4 41.1 20.5 43 24 43c6.6 0 12-5.4 12-12 0-.8-.1-1.5-.2-2.2z" fill="#1976D2"/></g></svg>
+                Sign Up with Google
               </button>
-            </form>
+            </>
           )}
           <div className="mt-4 text-center">
             {authMode === 'login' ? (
